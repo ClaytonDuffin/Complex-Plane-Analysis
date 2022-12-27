@@ -63,8 +63,8 @@ Function used for batching up a pandas DataFrame or Series object. For this appl
 ### Usage <a name = "batcherUsage"></a>
 ```
 subsections = batcher(sineWave,               
-					  subframeLength = 90,     
-					  gapToNextFrame = 1)   
+		      subframeLength = 90,     
+		      gapToNextFrame = 1)   
 ```
 ### Output <a name = "batcherOutput"></a>
 ```
@@ -84,8 +84,8 @@ Mathematical model for generating trading signals. Quite funky. It wasn't intend
 ### Usage <a name = "matrixMashUsage"></a>
 ```
 subsections = batcher(sineWave,               
-					  subframeLength = 90,     
-					  gapToNextFrame = 1)   
+		      subframeLength = 90,     
+		      gapToNextFrame = 1)     
 
 for i, j in enumerate(subsections):
 	goAndSaveIndividualPlot(j, matrixMash(j), savePath)
@@ -157,8 +157,8 @@ sineWave = sine(numberOfHertz = 780,
 				wobbleDegree = 100)
 
 subsections = batcher(sineWave,               
-					  subframeLength = 90,   
-					  gapToNextFrame = 1)    
+		      subframeLength = 90,     
+		      gapToNextFrame = 1)   
 					  
 complexPlaneAndSinePlot(subsections)
 ```
@@ -182,8 +182,8 @@ Function used to implement the goAndSaveIndividualPlot() function for the entire
 ### Usage <a name = "goAndSavePlotsUsage"></a>
 ```
 subsections = batcher(sineWave,               
-					  subframeLength = 90,     
-					  gapToNextFrame = 1)   
+		      subframeLength = 90,     
+		      gapToNextFrame = 1)   
 					  
 savePath = '/Users/claytonduffin/Desktop/subDir/'
 goAndSavePlots(subsections, savePath)
