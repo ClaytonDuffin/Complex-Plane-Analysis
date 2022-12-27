@@ -28,7 +28,6 @@
     + [Usage](#goAndSavePlotsUsage)
     + [Output](#goAndSavePlotsOutput)
 
-
 + [Suggestions for Continuation](#suggestionsForContinuation)
 
 ## General Description <a name = "generalDescription"></a>
@@ -50,13 +49,13 @@ Function used for batching up a pandas DataFrame or Series object. For this appl
 
 ### Parameters <a name = "batcherParameters"></a>
 * sineWaveData : pd.Series
-	The input data for batching.
+	-The input data for batching.
 
-*	subframeLength: int
-	Determines how long each subframe should be.
+* subframeLength: int
+	- Determines how long each subframe should be.
 
 * gapToNextFrame: int
-	Determines the spacing between the start of one subframe and the next.
+	- Determines the spacing between the start of one subframe and the next.
 
 ![batcherParameters1](https://user-images.githubusercontent.com/116965482/209422703-febc4210-2a6b-4dc7-b603-5f34b25f9410.png)
 
