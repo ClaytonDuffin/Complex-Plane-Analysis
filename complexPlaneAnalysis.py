@@ -244,8 +244,8 @@ def complexPlaneAndSinePlot(subsections: list[list]) -> None:
     
 
 def goAndSaveIndividualPlot(sineWave: pd.Series,
-                  curveToObserve: pd.Series,
-                  savePath: str) -> None: #technically returns an image but couldn't find any information online about type hinting for this case.
+                            curveToObserve: pd.Series,
+                            savePath: str) -> None: #technically returns an image but couldn't find any information online about type hinting for this case.
     
     '''
     Function used for creating a plot showing both the sine wave, and the output from the matrixMash function computed over the sine wave.
