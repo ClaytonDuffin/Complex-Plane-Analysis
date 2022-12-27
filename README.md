@@ -49,7 +49,7 @@ Function used for batching up a pandas DataFrame or Series object. For this appl
 
 ### Parameters <a name = "batcherParameters"></a>
 * sineWaveData : pd.Series
-	-The input data for batching.
+	- The input data for batching.
 
 * subframeLength: int
 	- Determines how long each subframe should be.
@@ -77,7 +77,7 @@ Mathematical model for generating trading signals. Quite funky. It wasn't intend
 
 ### Parameters  <a name = "matrixMashParameters"></a>
 * originalSeries : pd.Series
-	The input data for the model.
+	- The input data for the model.
 
 
 ### Usage <a name = "matrixMashUsage"></a>
@@ -102,20 +102,20 @@ Function used to create and return a sine wave. This will be used for batching, 
 ### Parameters  <a name = "sineParameters"></a>
 
 * numberOfHertz : int, optional
-	How many hertz to use for initial generation of the sineWave.
+	- How many hertz to use for initial generation of the sineWave.
 *  sineFrequency : int, optional
-    Can be used to steepen or flatten the curve.
+    	- Can be used to steepen or flatten the curve.
 * sampleSize : int, optional
-	How many x-axis ticks are wished for.
+	- How many x-axis ticks are wished for.
 *  wobbleType: str, optional
     Takes one of four inputs:
 	  *  None – Applies no wobble to the curve.
 	  *  'Wobble1' – Randomly chooses to either add or subtract a random number between 1 and 10 (inclusive) divided by wobbleDegree from the sine wave at each step.
-   * 'Wobble2' – Randomly chooses to either add or subtract a random number between 1 and 10 (inclusive) divided by wobbleDegree from the sine wave at every 10th step, and then remains at that y coordinate until the next 10th step.
-   * 'Wobble3' – Randomly chooses to either add or subtract a random number between 1 and 10 (inclusive)  divided by wobbleDegree from the sine wave at every 10th step. The sine wave returns to normal after each 10th step.
+  	  * 'Wobble2' – Randomly chooses to either add or subtract a random number between 1 and 10 (inclusive) divided by wobbleDegree from the sine wave at every 10th step, and then remains at that y coordinate until the next 10th step.
+  	  * 'Wobble3' – Randomly chooses to either add or subtract a random number between 1 and 10 (inclusive)  divided by wobbleDegree from the sine wave at every 10th step. The sine wave returns to normal after each 10th step.
 
 * wobbleDegree: int, optional
-	Determines the magnitude of wobble for each of the wobbleType scenarios. As the wobbleDegree decreases, the wobble magnitude increases.
+	- Determines the magnitude of wobble for each of the wobbleType scenarios. As the wobbleDegree decreases, the wobble magnitude increases.
 
 ![sineParameters1](https://user-images.githubusercontent.com/116965482/209422690-155aeb21-e33f-47a0-bb61-8d011e2c345d.png)
 
@@ -145,7 +145,7 @@ It is important to note and keep in mind that this method of transformation uses
 
 ### Parameters <a name = "complexPlaneAndSinePlotParameters"></a>
 * subsections : list[list]
-	The batched sections of the sine wave.
+	- The batched sections of the sine wave.
 	
 ### Usage <a name = "complexPlaneAndSinePlotUsage"></a>
 ```
@@ -174,9 +174,9 @@ Function used to implement the goAndSaveIndividualPlot() function for the entire
 
 ### Parameters <a name = "goAndSavePlotsParameters"></a>
 * subsections : list[list]
-	The batched sections of the sine wave.
+	- The batched sections of the sine wave.
 * savePath : str
-	Defines where the files are to be saved.
+	- Defines where the files are to be saved.
 
 ### Usage <a name = "goAndSavePlotsUsage"></a>
 ```
