@@ -35,8 +35,8 @@
 Script used for examining the behavior of an automated trading model generated from a one-dimensional, dependent or semi-dependent time series (sine wave). This is done generally by running the strategy over the sine wave and then transforming the final units of the trading model computations (at each time-step of the sine wave) to a complex plane. The script has the capability to plot the complex plane, and then also separately, the sine wave against the last units from each time-step of trading model output. In addition to this, the script can save images of the trading model ran over the sine wave at each time-step. This functionality allows for the user to shuffle through the images either manually, or by creating a video using the individual frames.
 
 As demonstrated in the source code, there are two primary functions that produce final output:
-1.) complexPlaneAndSinePlot()
-2.) goAndSavePlots()
+	1. complexPlaneAndSinePlot()
+	2. goAndSavePlots()
 
 For more specifics, or to get a better idea on all the moving parts in general, read through each function's tab, accessible via scrolling, or the Table of Contents. There are some additional functionalities not mentioned here that are mentioned there which you may find relevant or important. There are also functionalities not mentioned anywhere but the source code, such as the minMaxScaler function. Everything is documented fairly well there, so be sure to have a look if you like the script. The best way to understand how it all works, in my opinion, is to just fire it up!
 
@@ -79,7 +79,6 @@ Mathematical model for generating trading signals. Quite funky. It wasn't intend
 * originalSeries : pd.Series
 	- The input data for the model.
 
-
 ### Usage <a name = "mmashus"></a>
 ```
 subsections = batcher(sineWave,               
@@ -103,19 +102,19 @@ Function used to create and return a sine wave. This will be used for batching, 
 
 * numberOfHertz : int, optional
 	- How many hertz to use for initial generation of the sineWave.
-*  sineFrequency : int, optional
-    	- Can be used to steepen or flatten the curve.
+* sineFrequency : int, optional
+	- Can be used to steepen or flatten the curve.
 * sampleSize : int, optional
 	- How many x-axis ticks are wished for.
-*  wobbleType: str, optional
-    Takes one of four inputs:
-	  *  None – Applies no wobble to the curve.
-	  *  'Wobble1' – Randomly chooses to either add or subtract a random number between 1 and 10 (inclusive) divided by wobbleDegree from the sine wave at each step.
-  	  * 'Wobble2' – Randomly chooses to either add or subtract a random number between 1 and 10 (inclusive) divided by wobbleDegree from the sine wave at every 10th step, and then remains at that y coordinate until the next 10th step.
-  	  * 'Wobble3' – Randomly chooses to either add or subtract a random number between 1 and 10 (inclusive)  divided by wobbleDegree from the sine wave at every 10th step. The sine wave returns to normal after each 10th step.
+* wobbleType: str, optional
+   	- Takes one of four inputs:
+		- None ... Applies no wobble to the curve.
+		- 'Wobble1' ... Randomly chooses to either add or subtract a random number between 1 and 10 (inclusive) divided by wobbleDegree from the sine wave at each step.
+		- 'Wobble2' ... Randomly chooses to either add or subtract a random number between 1 and 10 (inclusive) divided by wobbleDegree from the sine wave at every 10th step, and then remains at that y-axis coordinate until the next 10th step.
+		- 'Wobble3' ... Randomly chooses to either add or subtract a random number between 1 and 10 (inclusive)  divided by wobbleDegree from the sine wave at every 10th step. The sine wave returns to normal after each 10th step.
 
 * wobbleDegree: int, optional
-	- Determines the magnitude of wobble for each of the wobbleType scenarios. As the wobbleDegree decreases, the wobble magnitude increases.
+	- Determines the magnitude of wobble for each of the wobbleType scenarios. As wobbleDegree (input) decreases, wobble magnitude (output) increases.
 
 ![sineParameters1](https://user-images.githubusercontent.com/116965482/209422690-155aeb21-e33f-47a0-bb61-8d011e2c345d.png)
 
@@ -139,9 +138,9 @@ Prior to me explaining, please check out these wikipedia diagrams:
 ![wikipedia Figure 1](https://upload.wikimedia.org/wikipedia/commons/a/a5/ComplexSinInATimeAxe.gif)
 ![wikipedia Figure 2](https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Helix_in_complex_plane.jpg/800px-Helix_in_complex_plane.jpg)
 
-Now imagine running the trading model for the length of the sine wave (as is already being done) but then collapsing it onto the complex plane. This is what this function achieves. It also plots that newly computed complex plane, and then separately, the sine wave against the last units of the trading model at each time-step.
+Now, imagine running the trading model through the length of the sine wave (as is already being done) but then "collapsing," or transforming, the final unit of output at each step onto the complex plane respective to the location in space and time which it was generated in. This is what this function achieves. It also plots that newly computed complex plane, and then separately, the sine wave against the last units of the trading model at each time-step.
 
-It is important to note and keep in mind that this method of transformation uses the last unit of the trading model at each step, and thus, other potentially valuable features generated at each step are lost in this use case. To examine these features more in-depth, refer to the goAndSavePlots() function, which stores individual images of the model, generated at each step of the sine wave for however many units were requested.
+It is important to note and keep in mind that this method of transformation uses the last unit of the trading model at each step, and thus, other potentially valuable features generated at each step are lost in this specific use case. To examine these features more in-depth, refer to the goAndSavePlots() function, which stores individual images of the model, generated at each step of the sine wave for however many units were requested.
 
 ### Parameters <a name = "cpsppa"></a>
 * subsections : list[list]
@@ -193,6 +192,6 @@ goAndSavePlots(subsections, savePath)
 
 ## Suggestions for Continuation <a name = "sugcon"></a>
 
-1.) I suggest looking more into the complex plane, using actual financial data.  In order to do this, you might have to adjust the data to be relative to the sine wave before making computations. I would think long and hard about the proper way to do this. There is a chance that this would just take a small adjustment, and that the only issue you might come across would be trying to feed matrixMash() a pandas DataFrame instead of a pandas Series. In order to resolve this, set the sineWave parameter to say, a series of closing prices. I recommend studying how the trading model behaves relative to the different parameters it is fed and datasets it is being computed over (sine waves – with and without modifications) prior to just charting it out with real financial data, so that you can avoid bias in developing or looking for patterns if you are using this script to develop a strategy from the ground up.
+1. I suggest looking more into the complex plane, using actual financial data.  In order to do this, you might have to adjust the data to be relative to the sine wave before making computations. I would think long and hard about the proper way to do this. There is a chance that this would just take a small adjustment, and that the only issue you might come across would be trying to feed matrixMash() a pandas DataFrame instead of a pandas Series. In order to resolve this, set the sineWave parameter to say, a series of closing prices. I recommend studying how the trading model behaves relative to the different parameters it is fed and datasets it is being computed over (sine waves – with and without modifications) prior to just charting it out with real financial data, so that you can avoid bias in developing or looking for patterns if you are using this script to develop a strategy from the ground up.
 
-2.) I suggest adding some more creative options to the sine() function's wobbleType parameter. Some conditional scenarios might be neat. I suggest going easy with it, as I feel only adjusting one feature at a time is important for better comprehension of the model in the end.
+2. I suggest adding some more creative options to the sine() function's wobbleType parameter. Some conditional scenarios might be neat. I suggest going easy with it, as I feel only adjusting one feature at a time is important for better comprehension of the model in the end.
