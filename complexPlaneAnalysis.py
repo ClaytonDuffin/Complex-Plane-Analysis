@@ -19,7 +19,6 @@ def batcher(sineWaveData: Union[pd.Series, pd.DataFrame],
     
     '''
     Function used for batching up a pandas DataFrame or Series object. The output data will be used for modeling.
-    Already pretty fast this way but if you want to make it faster, I suggest looking into itertools zip_longest.
     
     Parameters
     ----------   
