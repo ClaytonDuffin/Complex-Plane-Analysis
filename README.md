@@ -34,9 +34,9 @@
 
 Script used for examining the behavior of an automated trading model generated from a one-dimensional, dependent or semi-dependent time series (sine wave). This is done generally by running the strategy over the sine wave and then transforming the final units of the trading model computations (at each time-step of the sine wave) to a complex plane. The script has the capability to plot the complex plane, and then also separately, the sine wave against the last units from each time-step of trading model output. In addition to this, the script can save images of the trading model ran over the sine wave at each time-step. This functionality allows for the user to shuffle through the images either manually, or by creating a video using the individual frames.
 
-As demonstrated in the source code, there are two primary functions that produce final output:
-	1. complexPlaneAndSinePlot()
-	2. goAndSavePlots()
+As demonstrated in the source code, there are two primary functions that produce output:
+1. complexPlaneAndSinePlot()
+2. goAndSavePlots()
 
 For more specifics, or to get a better idea on all the moving parts in general, read through each function's tab, accessible via scrolling, or the Table of Contents. There are some additional functionalities not mentioned here that are mentioned there which you may find relevant or important. There are also functionalities not mentioned anywhere but the source code, such as the minMaxScaler function. Everything is documented fairly well there, so be sure to have a look if you like the script. The best way to understand how it all works, in my opinion, is to just fire it up!
 
