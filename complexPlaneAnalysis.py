@@ -1,3 +1,4 @@
+import multiprocess
 import os
 import numpy as np
 import pandas as pd
@@ -90,6 +91,7 @@ def sine(numberOfHertz: Optional[int] = 780,
          sampleSize: Optional[int] = 780,
          wobbleType: Optional[str] = None,
          wobbleDegree: Optional[int] = 100) -> pd.Series:
+            
     '''
     Function used to create and return a sine wave. This will be used for batching, and the 
     trading model will then be applied to these batches of the sine wave. There are parameters
@@ -185,13 +187,9 @@ def complexPlaneAndSinePlot(subsections: list[list]) -> None:
          The batched sections of the sine wave.
      '''
          
-    finalUnitsOfModelSteps = []
-    for i, j in tqdm(enumerate(subsections), total = (len(subsections) / 2)):
-        if (i < (len(subsections) / 2)):
-            finalUnitsOfModelSteps.append(list(matrixMash(j).tail(1)))
-        else:
-            break
-        
+    with multiprocess.Pool(multiprocess.cpu_count()) as pool:
+        finalUnitsOfModelSteps = [list(i.tail(1)) for i in tqdm(pool.imap(matrixMash, [i for i in subsections[0: int(len(subsections) / 2)]]), total = int(len(subsections) / 2))] # only uses half of the sineWave since default frequency is 2
+
     potentialInsights = pd.DataFrame(list(chain(*(finalUnitsOfModelSteps))))
     scaledPotentialInsights = minMaxScaler(potentialInsights)
     fullT = np.linspace(np.pi, -np.pi, len(potentialInsights))
@@ -201,7 +199,6 @@ def complexPlaneAndSinePlot(subsections: list[list]) -> None:
     radius = 1
     x, y = [], []
     for i, j in enumerate(newT):
-        print(i,j)
         x.append((scaledPotentialInsights.loc[i]) * (radius * np.sin(j)))
         y.append((scaledPotentialInsights.loc[i]) * (radius * np.cos(j)))
 
@@ -220,7 +217,7 @@ def complexPlaneAndSinePlot(subsections: list[list]) -> None:
     plt.pause(0.01)
     
     fig, axes = plt.subplots(2,1, figsize=[14.275,14.275], sharex=True)
-    axes[0].plot(pd.DataFrame(sineWave[0:390]), color = 'black',linewidth = 1) #be sure to note that this variable is not defined locally.
+    axes[0].plot(pd.DataFrame(sineWave[0:390]), color = 'black',linewidth = 1) # be sure to note that this variable is not defined locally.
     axes[1].plot(potentialInsights, color = 'black',linewidth = 1)
     axes[0].set_title('Final Units of Trading Model at Each Step of Sine Wave', size = 20)
     axes[0].text(22, 0.1,'\nQuadrant I', fontsize = 20)
@@ -244,7 +241,7 @@ def complexPlaneAndSinePlot(subsections: list[list]) -> None:
 
 def goAndSaveIndividualPlot(sineWave: pd.Series,
                             curveToObserve: pd.Series,
-                            savePath: str) -> None: #technically returns an image but couldn't find any information online about type hinting for this case.
+                            savePath: str) -> None: # technically returns an image but couldn't find much information online about type hinting for this case.
     
     '''
     Function used for creating a plot showing both the sine wave, and the output from the matrixMash function computed over the sine wave.
@@ -276,7 +273,7 @@ def goAndSaveIndividualPlot(sineWave: pd.Series,
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
     plt.tick_params(labelsize = 16, labelright = True)
-    #plt.pause(0.01) #add this line to see the charts inline
+    #plt.pause(0.01) # add this line to see the charts inline
     
     imageCount = 0
     while True:
@@ -290,8 +287,10 @@ def goAndSaveIndividualPlot(sineWave: pd.Series,
 
 def goAndSavePlots(subsections: list[list],
                    savePath: str) -> None:
+            
     '''
     Function used to implement the goAndSaveIndividualPlot() function for the entirety of the sine wave.
+    It could make sense to use concurrency here, but do be warned, it becomes quite the headache with starmap, tqdm, and matplotlib.pyplot.
     
     Parameters
     ----------   
@@ -304,7 +303,6 @@ def goAndSavePlots(subsections: list[list],
     for i, j in tqdm(enumerate(subsections), total = len(subsections)):
         goAndSaveIndividualPlot(j,  matrixMash(j), savePath)
         
-
 
 sineWave = sine(numberOfHertz = 780,
                 sineFrequency = 2,
