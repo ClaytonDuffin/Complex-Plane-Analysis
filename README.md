@@ -121,10 +121,10 @@ Function used to create and return a sine wave. This will be used for batching, 
 ### Usage <a name = "sineus"></a>
 ```
 sineWave = sine(numberOfHertz = 780,
-				sineFrequency = 2,
-				sampleSize = 780,
-				wobbleType = None,
-				wobbleDegree = 100)
+		sineFrequency = 2,
+		sampleSize = 780,
+		wobbleType = None,
+		wobbleDegree = 100)
 ```
 ### Output <a name = "sineou"></a>
 ```
@@ -149,10 +149,10 @@ It is important to note and keep in mind that this method of transformation uses
 ### Usage <a name = "cpspus"></a>
 ```
 sineWave = sine(numberOfHertz = 780,
-				sineFrequency = 2,
-				sampleSize = 780,
-				wobbleType = None,
-				wobbleDegree = 100)
+		sineFrequency = 2,
+		sampleSize = 780,
+		wobbleType = None,
+		wobbleDegree = 100)
 
 subsections = batcher(sineWave,               
 		      subframeLength = 90,     
